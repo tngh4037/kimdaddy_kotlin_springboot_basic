@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true # Spring Boot가 제공하는 인코딩 필터(CharacterEncodingFilter)를 활성화 ( 이 필터가 요청/응답에 UTF-8을 강제로 적용함 )
+      force: true # request/response 시 인코딩 강제 ( 클라이언트가 다른 인코딩 보내도 무조건 UTF-8로 덮어쓰기 )
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/demo_db
+    username: root
+    password: 1234
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create # entity table drop -> entity table create
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+        highlight_sql: true
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type.descriptor.sql: trace
