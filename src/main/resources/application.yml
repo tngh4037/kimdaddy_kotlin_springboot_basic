@@ -29,3 +29,6 @@ logging:
       hibernate:
         SQL: debug
         type.descriptor.sql: trace
+kakao:
+  blog:
+    REST_API_KEY: ${KAKAO_RESTAPI_KEY} # // Key 정보는 환경변수(Environment variables)에서 추가함. ( 참고. Spring이 application.yml을 먼저 읽음 -> ${} 내부를 Environment에서 다시 치환 -> 최종적으로 BlogService 의 @Value restApiKey에 주입됨 )

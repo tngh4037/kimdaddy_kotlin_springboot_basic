@@ -24,6 +24,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 
+	// webClient
+	implementation("org.springframework:spring-webflux")
+
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	runtimeOnly("com.mysql:mysql-connector-j")
 
