@@ -9,5 +9,5 @@ import jakarta.persistence.Table
 class WordCount (
     @Id
     val word: String,
-    val cnt: Int = 0
+    var cnt: Int = 0
 )

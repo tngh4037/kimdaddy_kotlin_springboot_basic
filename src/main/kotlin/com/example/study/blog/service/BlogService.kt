@@ -1,6 +1,7 @@
 package com.example.study.blog.service
 
 import com.example.study.blog.dto.BlogDto
+import com.example.study.blog.entity.WordCount
 import com.example.study.blog.repository.WordRepository
 import com.example.study.core.exception.InvalidInputException
 import org.springframework.beans.factory.annotation.Value
@@ -56,8 +57,19 @@ class BlogService (
             .retrieve()
             .bodyToMono<String>()
 
+        // 검색어 순위 추가
+        val lowQuery: String = blogDto.query.lowercase()
+        val word: WordCount = wordRepository.findById(lowQuery).orElse(WordCount(lowQuery))
+        word.cnt++
+        wordRepository.save(word) // 카카오 api 요청한 검색어를 소문자 처리해서 WordCount 에 저장 ( 기존에 있다면 cnt 컬럼에 +1, 없으면 새로운 WordCount 생성 )
+
         return response.block()
     }
+
+    /**
+     * 검색어 상위 10개의 정보 조회
+     */
+    fun searchWordRank(): List<WordCount> = wordRepository.findTop10ByOrderByCntDesc()
 }
 
 private enum class ExceptionMsg(val msg: String) {
